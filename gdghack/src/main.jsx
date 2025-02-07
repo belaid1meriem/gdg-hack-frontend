@@ -8,6 +8,7 @@ import StudentProjects from "./components/StudentProjects";
 import StudentVirtualExp from "./components/StudentVirtualExp";
 import StudentRating from "./components/StudentRating";
 import StudentServiceExchanging from "./components/StudentServiceExchanging";
+import IndicatorsContextProvider from "./contexts/indicatorContext";
 
 const router = createBrowserRouter([
   { path: "/", element: <App /> },
@@ -25,6 +26,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <IndicatorsContextProvider>
+      <RouterProvider router={router} />
+    </IndicatorsContextProvider>
   </React.StrictMode>
 );

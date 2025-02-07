@@ -5,7 +5,7 @@ import { useState } from "react";
 function StudentMenu() {
   const { id } = useParams();
   const [menuOpen, setMenuOpen] = useState(false); // Toggle state
-
+  
   const links = [
     { path: "projects", label: "Projects" },
     { path: "virtualexperience", label: "Virtual Experience" },
