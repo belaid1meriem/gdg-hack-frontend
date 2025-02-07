@@ -7,7 +7,7 @@ function AddRating({closeForm}) {
     const navigate = useNavigate();
     const { setErrorMsg }= useContext(indicatorsContext)
     const [formData, setFormData] = useState({
-        entreprise: "",
+      enterprise: localStorage.getItem('entrepriseID'),
         rating:"",
         review:"",
         student: id
@@ -23,7 +23,7 @@ function AddRating({closeForm}) {
         console.log("Submitted Data:", formData);
         try {
             setDisabled(true)
-            const response = await axios.post('http://127.0.0.1:8000/student/virtual_experiences/',formData,{
+            const response = await axios.post('http://127.0.0.1:8000/student/ratings/add/',formData,{
                 headers:{
                     'Authorization': 'Bearer ' + localStorage.getItem('token')
                 }
@@ -49,19 +49,6 @@ function AddRating({closeForm}) {
         onClick={(e) => e.stopPropagation()}
       >
         <h2 className="text-xl font-bold text-gray-800">Submit a Review</h2>
-
-        {/* Entreprise */}
-        {/* <div>
-          <label className="block text-sm font-medium text-gray-700">Entreprise</label>
-          <input
-            type="text"
-            name="entreprise"
-            value={formData.entreprise}
-            onChange={handleChange}
-            className="w-full p-2 mt-1 border border-gray-300 rounded-md focus:ring focus:ring-gray-400"
-            required
-          />
-        </div> */}
 
         {/* Rating */}
         <div>

@@ -37,8 +37,11 @@ const useServiceExchange = (id) => {
         setExp(response.data);
         console.log(response.data)
       } catch (error) {
-        console.error('Error fetching student info:', error);
-        setErrorMsg('Error fetching student info. Please try again later.');
+        if(error.status !== 404){
+          console.error('Error fetching student info:', error);
+         setErrorMsg('Error fetching student info. Please try again later.');
+        }
+       
       }
       finally {
         setLoading(false);

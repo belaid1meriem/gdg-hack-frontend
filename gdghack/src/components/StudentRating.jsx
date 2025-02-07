@@ -17,7 +17,7 @@ function StudentRating() {
       {ratings.map((rt) => (
         <div className='flex flex-col items-start gap-2 border rounded-md shadow p-4 relative hover:scale-105 transition-all duration-500' key={rt.id}>
           <span className='absolute top-2 right-2 text-md font-medium text-[#ED9AC2]'>{rt.rating}/5</span>
-          <h4 className='font-semibold'>{rt.entreprise || "company A"}</h4>
+          <h4 className='font-semibold'>company {rt.enterprise}</h4>
           <p>{rt.review}</p>
         </div>
       ))}
@@ -45,8 +45,10 @@ const useRatings = (id) => {
         setRatings(response.data);
         console.log(response.data)
       } catch (error) {
-        console.error('Error fetching student info:', error);
-        setErrorMsg('Error fetching student info. Please try again later.');
+        if(error.status !== 404){
+          console.error('Error fetching student info:', error);
+         setErrorMsg('Error fetching student info. Please try again later.');
+        }
       }
       finally {
         setLoading(false);
