@@ -1,6 +1,4 @@
 import React from 'react'
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFacebookSquare, faGithubSquare, faInstagram, faTwitterSquare } from "@fortawesome/free-brands-svg-icons";
 function Footer() {
   return (
     <div className=' w-full rounded-lg mx-auto py-16 px-4 grid lg:grid-cols-3 gap-8 text-gray-300 bg-[#4C489E] ' id='Footer'>
@@ -9,10 +7,7 @@ function Footer() {
         <p className='py-4'>StudentWorks is committed to helping students achieve financial independence and career growth. Our platform connects talented students with real-world opportunities, bridging the gap between education and the professional world. Together, we’re building a future where students can learn, earn, and grow.</p>
      </div>
      <div className='flex md:w-[75%] my-6 '>
-     <FontAwesomeIcon icon={faFacebookSquare} size="2x" />
-     <FontAwesomeIcon icon={faInstagram} size="2x" />
-     <FontAwesomeIcon icon={faGithubSquare} size="2x" />
-     <FontAwesomeIcon icon={faTwitterSquare} size="2x" />
+    
      </div>
 
   

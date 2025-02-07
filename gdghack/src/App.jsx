@@ -15,13 +15,7 @@ import SigninCompany from './components/SigninCompany';
 function App() {
  
   return (
-    <>
-     <div>
-    
-     </div>
-    
-  
-    
-    </>
-  )
+    <></>
+  ) }
 
+export default App
