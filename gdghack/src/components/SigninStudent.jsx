@@ -3,18 +3,37 @@ import React, { useState } from "react";
 function SigninStudent() {
 
     const [formData, setFormData] = useState({
-        name: "",
+        fullname: "",
         email: "",
         password: "",
         phone: "",
         university: "",
         major: "",
-        year: "",
-        skills: "",
-        workType: "",
-        linkedIn: "",
-        aboutMe: "",
+        year_studying: "",
+        skills: [],
+        bio: "",
+        status: true,
       });
+    
+
+      const [skillInput, setSkillInput] = useState(""); 
+
+      const addSkill = () => {
+        if (skillInput.trim() !== "") {
+          setFormData({
+            ...formData,
+            skills: [...formData.skills, skillInput.trim()], // Add the new skill to the array
+          });
+          setSkillInput(""); // Clear the input field
+        }
+      };
+    
+      const removeSkill = (index) => {
+        setFormData({
+          ...formData,
+          skills: formData.skills.filter((_, i) => i !== index), // Remove the skill by index
+        });
+      };
     
       const handleChange = (e) => {
         const { name, value, type, files } = e.target;
@@ -23,12 +42,48 @@ function SigninStudent() {
           [name]: type === "file" ? files[0] : value,
         });
       };
-    
-      const handleSubmit = (e) => {
+
+   
+      const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(formData);
-        
+      
+        try {
+          const response = await fetch("http://127.0.0.1:7000/student/register/student/", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            
+            },
+            body: JSON.stringify(formData),
+          });
+      
+          const result = await response.json();
+          localStorage.setItem("token", result.access);
+            localStorage.setItem("user", JSON.stringify(result));
+          if (response.ok) {
+            alert("Company created successfully!");
+            setFormData({
+              fullname: "",
+              email: "",
+              password: "",
+              phone: "",
+              university: "",
+              major: "",
+              year_studying: "",
+              skills: [],
+              bio: "",
+              status: true,
+            });
+          } else {
+            alert(`Error: ${result.message}`);
+          }
+        } catch (error) {
+          console.error("Error creating company:", error);
+          alert("An error occurred. Please try again.");
+        }
       };
+      
+      
   return (
     <div className="max-w-3xl mx-auto bg-white p-8 shadow-md rounded-lg">
       <h1 className="text-3xl font-bold text-center text-[#4C489E] mb-6">
@@ -40,8 +95,8 @@ function SigninStudent() {
           <label className="block text-gray-700 font-medium">Full Name</label>
           <input
             type="text"
-            name="name"
-            value={formData.name}
+            name="fullname"
+            value={formData.fullname}
             onChange={handleChange}
             placeholder="Enter your full name"
             className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4C489E]"
@@ -122,8 +177,8 @@ function SigninStudent() {
         <div>
           <label className="block text-gray-700 font-medium">Year of Study</label>
           <select
-            name="year"
-            value={formData.year}
+            name="year_studying"
+            value={formData. year_studying}
             onChange={handleChange}
             className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4C489E]"
             required
@@ -133,48 +188,57 @@ function SigninStudent() {
             <option value="2nd">2nd Year</option>
             <option value="3rd">3rd Year</option>
             <option value="4th">4th Year</option>
+            <option value="5th">5th Year</option>
           </select>
         </div>
 
-        {/* Skills */}
-        <div>
+        
+          {/* Skills */}
+          <div>
           <label className="block text-gray-700 font-medium">Skills</label>
-          <input
-            type="text"
-            name="skills"
-            value={formData.skills}
-            onChange={handleChange}
-            placeholder="E.g., Video editing, coding, writing"
-            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4C489E]"
-            required
-          />
+          <div className="flex space-x-2">
+            <input
+              type="text"
+              value={skillInput}
+              onChange={(e) => setSkillInput(e.target.value)}
+              placeholder="Enter a skill"
+              className="flex-1 p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4C489E]"
+            />
+            <button
+              type="button"
+              onClick={addSkill}
+              className="px-4 py-2 bg-[#4C489E] text-white rounded-lg hover:bg-[#372F78] transition"
+            >
+              Add
+            </button>
+          </div>
+          <ul className="mt-2">
+            {formData.skills.map((skill, index) => (
+              <li key={index} className="flex items-center space-x-2">
+                <span className="text-gray-700">{skill}</span>
+                <button
+                  type="button"
+                  onClick={() => removeSkill(index)}
+                  className="text-red-500 hover:text-red-700"
+                >
+                  Remove
+                </button>
+              </li>
+            ))}
+          </ul>
         </div>
 
      
 
       
 
-        {/* LinkedIn */}
-        <div>
-          <label className="block text-gray-700 font-medium">
-            LinkedIn Profile (Optional)
-          </label>
-          <input
-            type="url"
-            name="linkedIn"
-            value={formData.linkedIn}
-            onChange={handleChange}
-            placeholder="Paste your LinkedIn URL"
-            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4C489E]"
-          />
-        </div>
-
+       
         {/* About Me */}
         <div>
           <label className="block text-gray-700 font-medium">About Me</label>
           <textarea
-            name="aboutMe"
-            value={formData.aboutMe}
+            name="bio"
+            value={formData.bio}
             onChange={handleChange}
             placeholder="Briefly introduce yourself"
             className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4C489E]"

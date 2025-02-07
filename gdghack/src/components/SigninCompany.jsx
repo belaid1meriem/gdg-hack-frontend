@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 function SigninCompany() {
     const [formData, setFormData] = useState({
-        companyName: "",
+        name: "",
         email: "",
         password: "",
         phone: "",
         industry: "",
         location: "",
         description: "",
-        website: "",
-        linkedin: "",
+        web_site: "",
+        role: "enterprise",
       });
     
       const handleChange = (e) => {
@@ -20,11 +20,44 @@ function SigninCompany() {
         });
       };
     
-      const handleSubmit = (e) => {
+      const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(formData);
       
+        try {
+          const response = await fetch("http://127.0.0.1:7000/student/register/enterprise/", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            
+            },
+            body: JSON.stringify(formData),
+          });
+      
+          const result = await response.json();
+          localStorage.setItem("token", result.access);
+          localStorage.setItem("user", JSON.stringify(result));
+          if (response.ok) {
+            alert("Company created successfully!");
+            setFormData({
+              name: "",
+              email: "",
+              password: "",
+              phone: "",
+              industry: "",
+              location: "",
+              description: "",
+              web_site: "",
+                role: "enterprise",
+            });
+          } else {
+            alert(`Error: ${result.message}`);
+          }
+        } catch (error) {
+          console.error("Error creating company:", error);
+          alert("An error occurred. Please try again.");
+        }
       };
+      
   return (
     <div className="max-w-3xl mx-auto bg-white p-8 shadow-md rounded-lg">
     <h1 className="text-3xl font-bold text-center text-[#4C489E] mb-6">
@@ -36,8 +69,8 @@ function SigninCompany() {
         <label className="block text-gray-700 font-medium">Company Name</label>
         <input
           type="text"
-          name="companyName"
-          value={formData.companyName}
+          name="name"
+          value={formData.name}
           onChange={handleChange}
           placeholder="Enter your company name"
           className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4C489E]"
@@ -134,26 +167,15 @@ function SigninCompany() {
         <label className="block text-gray-700 font-medium">Website (Optional)</label>
         <input
           type="url"
-          name="website"
-          value={formData.website}
+          name="web_site"
+          value={formData.web_site}
           onChange={handleChange}
           placeholder="Enter your company website URL"
           className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4C489E]"
         />
       </div>
 
-      {/* LinkedIn */}
-      <div>
-        <label className="block text-gray-700 font-medium">LinkedIn (Optional)</label>
-        <input
-          type="url"
-          name="linkedin"
-          value={formData.linkedin}
-          onChange={handleChange}
-          placeholder="Enter your LinkedIn profile URL"
-          className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4C489E]"
-        />
-      </div>
+     
 
 
       {/* Submit Button */}

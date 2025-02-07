@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from "react";
 import { FaUserGraduate, FaBuilding } from "react-icons/fa";
-
+import { useNavigate } from "react-router-dom";
 
 const options = [
     { id: "student", text: "I'm a student, looking for an opportunity.", icon: <FaUserGraduate /> },
@@ -9,7 +9,16 @@ const options = [
   ];
 
 function ChooseRole() {
+  const navigate = useNavigate(); 
     const [selected, setSelected] = useState("student");
+    const handleSignIn = () => {
+      if (selected === "student") {
+        navigate("/Signupstudent"); // Navigate to the student sign-in page
+      } else if (selected === "company") {
+        navigate("/Signupcompany"); // Navigate to the company sign-in page
+      }
+    };
+  
   return (
     <div>
       <h1 className="text-3xl font-bold text-[#4C489E]">Join us as a student or a company</h1>   
@@ -32,7 +41,7 @@ function ChooseRole() {
         </div>
       ))}
     </div>
-    <button className="bg-[#ED9AC2] w-[200px] rounded-md font-medium my-6 mx-auto py-3 text-white  ">Sign In</button>
+    <button onClick={handleSignIn} className="bg-[#ED9AC2] w-[200px] rounded-md font-medium my-6 mx-auto py-3 text-white  ">Sign Up</button>
     </div>
   )
 }
