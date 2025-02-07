@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import Business from '../assets/Business.svg';
+import office from '../assets/office.svg';
+import pc from '../assets/pc.svg';
 
 function LogIn() {
     const [email, setEmail] = useState("");
@@ -47,7 +49,7 @@ function LogIn() {
     };
 
     return (
-        <div className="flex">
+        <div className="flex flex-row justify-center items-center  gap-12 ">
             {/* Left Section - Login Form */}
             <div className="w-1/2 bg-white flex flex-col justify-center items-center p-8">
                 <h1 className="text-4xl font-bold mb-4 text-[#4C489E]">Welcome back </h1>
@@ -98,8 +100,8 @@ function LogIn() {
             </div>
 
             {/* Right Section - Image */}
-            <div className="w-[480px] hidden lg:flex justify-center items-center">
-                <img src={Business} alt="/" className="rounded-xl" />
+            <div className="w-[430px] hidden lg:flex justify-center items-center">
+                <img src={pc} alt="/" className="rounded-xl" />
             </div>
         </div>
     );

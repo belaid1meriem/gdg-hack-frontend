@@ -46,7 +46,7 @@ function SigninStudent() {
    
       const handleSubmit = async (e) => {
         e.preventDefault();
-      
+          console.log(formData)
         try {
           const response = await fetch("http://127.0.0.1:7000/student/register/student/", {
             method: "POST",
