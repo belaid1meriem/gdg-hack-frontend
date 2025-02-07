@@ -1,9 +1,17 @@
+
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import './index.css'
+import App from './App.jsx'
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import App from "./App";
+import LandingPage from './components/LandingPage.jsx';
+import SigninStudent from './components/SigninStudent.jsx';
+import SigninCompany from './components/SigninCompany.jsx';
+import ChooseRole from './components/ChooseRole.jsx';
+import LogIn from './components/LogIn.jsx';
 import StudentProfile from "./components/StudentProfile";
-import './index.css';
 import StudentProjects from "./components/StudentProjects";
 import StudentVirtualExp from "./components/StudentVirtualExp";
 import StudentRating from "./components/StudentRating";
@@ -15,11 +23,15 @@ import CompanyInternships from "./components/CompanyInternships";
 import CompanyCompetitions from "./components/CompanyCompetitions";
 import CompanyHacks from "./components/CompanyHacks";
 
-
 const router = createBrowserRouter([
-  { path: "/", element: <App /> },
+  { path: "/", element: <LandingPage />},
+  { path: "Landingpage",element: <LandingPage />},
+  { path: "SignupStudent", element: <SigninStudent />},
+  { path: "SignupCompany", element: <SigninCompany />},
+  { path: "Chooserole", element: <ChooseRole />},
+  { path: "Login", element: <LogIn/>},
   { path: "/student/:id",
-    element: <StudentProfile />,
+   element: <StudentProfile />,
     children: [
       { index: true, element: <StudentProjects /> }, // Default child
       { path: "projects", element: <StudentProjects /> },
@@ -38,6 +50,7 @@ const router = createBrowserRouter([
       { path: "hackathons", element: <CompanyHacks/> }, 
     ],
   }
+
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
