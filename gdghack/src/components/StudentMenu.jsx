@@ -62,7 +62,7 @@ function StudentMenu() {
 
           {/* Dropdown Menu */}
           {menuOpen && (
-            <ul className="absolute left-8 mt-2 w-48 bg-white border rounded shadow-md">
+            <ul className="absolute left-8 mt-2 w-48 bg-white border rounded shadow-md z-50">
               {links.map(({ path, label }) => (
                 <li key={path} className="p-2 hover:bg-gray-100">
                   <NavLink

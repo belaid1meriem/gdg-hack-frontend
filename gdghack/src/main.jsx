@@ -9,6 +9,12 @@ import StudentVirtualExp from "./components/StudentVirtualExp";
 import StudentRating from "./components/StudentRating";
 import StudentServiceExchanging from "./components/StudentServiceExchanging";
 import IndicatorsContextProvider from "./contexts/indicatorContext";
+import CompanyProfile from "./components/CompanyProfile";
+import CompanyJobs from "./components/CompanyJobs";
+import CompanyInternships from "./components/CompanyInternships";
+import CompanyCompetitions from "./components/CompanyCompetitions";
+import CompanyHacks from "./components/CompanyHacks";
+
 
 const router = createBrowserRouter([
   { path: "/", element: <App /> },
@@ -21,7 +27,17 @@ const router = createBrowserRouter([
       { path: "rating", element: <StudentRating /> },
       { path: "serviceexchange", element: <StudentServiceExchanging /> }, 
     ],
-     },
+  },
+  { path: "/company/:id",
+    element: <CompanyProfile />,
+    children: [
+      { index: true, element: <CompanyJobs /> }, // Default child
+      { path: "jobs", element: <CompanyJobs /> },
+      { path: "internships", element: <CompanyInternships /> },
+      { path: "competitions", element: <CompanyCompetitions /> },
+      { path: "hackathons", element: <CompanyHacks/> }, 
+    ],
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(

@@ -17,7 +17,7 @@ function StudentVirtualExp() {
       {exp.map((exp) => (
         <div className='flex flex-col items-center gap-2 border rounded-md shadow p-4 relative hover:scale-105 transition-all duration-500' key={exp.id}>
           <h4 className='font-semibold'>{exp.title}</h4>
-          <p>{exp.description}</p>
+          <p className='py-3'>{exp.description}</p>
           <p className='absolute top-2 right-2 p-1 bg-[#ED9AC2] bg-opacity-10 text-[#ED9AC2] border border-[#ED9AC2] rounded-md'>{exp.status}</p>
           <p className='absolute bottom-2 right-2 font-medium' >{exp.price} DA</p>
           {/* <button className='bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded'>Buy Now</button> */}
