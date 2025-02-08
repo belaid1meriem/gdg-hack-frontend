@@ -15,7 +15,7 @@ function CompanyInternships() {
 
   return (
     <div className='flex flex-col gap-4 px-8 py-4'>
-      <FaCirclePlus className='text-3xl self-end cursor-pointer' onClick={openForm} />
+      {localStorage.getItem('entrepriseID') === id && <FaCirclePlus className='text-3xl self-end cursor-pointer' onClick={openForm}/> }
       {internships.map((internship) => (
         <div 
           key={internship.id} 

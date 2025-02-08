@@ -4,6 +4,7 @@ import { indicatorsContext } from '../contexts/indicatorContext';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import AddHackathonForm from './AddHackathonForm';
+import React from 'react';
 
 function CompanyHacks() {
   const { id } = useParams();
@@ -14,7 +15,7 @@ function CompanyHacks() {
   const closeForm = () => setIsFormOpen(false);
   return (
     <div className='flex flex-col gap-4 px-8 py-4'>
-      <FaCirclePlus className='text-3xl self-end cursor-pointer' onClick={openForm} />
+      {localStorage.getItem('entrepriseID') === id && <FaCirclePlus className='text-3xl self-end cursor-pointer' onClick={openForm}/> }
       {hackathons.map((hack) => (
         <div 
           key={hack.id} 

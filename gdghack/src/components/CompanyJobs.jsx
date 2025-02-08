@@ -4,6 +4,7 @@ import { indicatorsContext } from '../contexts/indicatorContext';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import AddJobForm from './AddJobForm';
+import React from 'react';
 
 function CompanyJobs() {
   const { id } = useParams();
@@ -15,7 +16,7 @@ function CompanyJobs() {
 
   return (
     <div className='flex flex-col gap-4 px-8 py-4'>
-      <FaCirclePlus className='text-3xl self-end cursor-pointer' onClick={openForm} />
+      {localStorage.getItem('entrepriseID') === id && <FaCirclePlus className='text-3xl self-end cursor-pointer' onClick={openForm}/> }
       {jobs.map((job) => (
         <div 
           key={job.id} 

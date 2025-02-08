@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 function SigninCompany() {
     const [formData, setFormData] = useState({
         name: "",
@@ -11,7 +12,7 @@ function SigninCompany() {
         web_site: "",
         role: "enterprise",
       });
-    
+      const navigate = useNavigate();
       const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({
@@ -34,8 +35,10 @@ function SigninCompany() {
           });
       
           const result = await response.json();
-          localStorage.setItem("token", result.access);
+          localStorage.setItem("token", result.access_token);
           localStorage.setItem("user", JSON.stringify(result));
+          localStorage.setItem("entrepriseID", result.enterprise_id )
+          console.log(result)
           if (response.ok) {
             alert("Company created successfully!");
             setFormData({
@@ -49,6 +52,7 @@ function SigninCompany() {
               web_site: "",
                 role: "enterprise",
             });
+            navigate("/company/"+result.enterprise_id+"/jobs");
           } else {
             alert(`Error: ${result.message}`);
           }

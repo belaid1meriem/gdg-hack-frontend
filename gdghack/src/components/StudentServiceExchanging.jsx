@@ -26,7 +26,7 @@ function StudentServiceExchanging() {
 
   return (
     <div className='flex flex-col gap-4 px-8 py-4'>
-      <FaCirclePlus className='text-3xl self-end cursor-pointer' onClick={openForm}/>
+      {localStorage.getItem("studentID") === id && <FaCirclePlus className='text-3xl self-end cursor-pointer' onClick={openForm}/> }
       {services.map((service) => (
       <div 
         className="flex flex-col items-start gap-2 border rounded-md shadow p-4 relative hover:scale-105 transition-all duration-500" 
@@ -42,15 +42,13 @@ function StudentServiceExchanging() {
           (<h4 className="font-semibold">
             {service.student1+"  "+service.student1_name} 
           </h4>)}
-          {/* <h4 className="font-semibold">
-            {service.student1+"  "+service.student1_name} ↔ {service.student2+"  "+service.student2_name}
-          </h4>  */}
+
         <p className="text-sm text-gray-700">🎯 {service.task1}</p>
         {service.task2 && <p className="text-sm text-gray-700">🎯 {service.task2}</p> }
         <span className="text-xs text-gray-500">
           {new Date(service.created_at).toLocaleDateString()}
         </span>
-        {!service.student2 &&
+        {(!service.student2 && localStorage.getItem("studentID") !== id ) &&
         (<button onClick={()=>openJoinForm(service.id)} className=" place-self-end px-4 py-2 text-sm text-white bg-blue-500 rounded-md hover:bg-blue-600">
           Exchange
         </button>)

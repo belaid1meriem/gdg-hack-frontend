@@ -13,7 +13,7 @@ function StudentVirtualExp() {
   const closeForm = () => setIsFormOpen(false)
   return (
     <div className='flex flex-col gap-4 px-8 py-4'>
-      <FaCirclePlus className='text-3xl self-end cursor-pointer' onClick={openForm}/>
+      {localStorage.getItem("studentID") === id && <FaCirclePlus className='text-3xl self-end cursor-pointer' onClick={openForm}/> }
       {exp.map((exp) => (
         <div className='flex flex-col items-center gap-2 border rounded-md shadow p-4 relative hover:scale-105 transition-all duration-500' key={exp.id}>
           <h4 className='font-semibold'>{exp.title}</h4>

@@ -35,6 +35,8 @@ const router = createBrowserRouter([
   { path: "Chooserole", element: <ChooseRole />},
   { path: "Searchresults", element: <SearchResults />},
   { path: "Searchresultsstudent", element: <SearchResultsStudent/>},
+  { path: "Searchstudent", element: <SearchStudent/>},
+  { path: "Searchcompany", element: <SearchCompany/>},
   { path: "Login", element: <LogIn/>},
   { path: "/student/:id",
    element: <StudentProfile />,

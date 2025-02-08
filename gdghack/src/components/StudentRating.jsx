@@ -13,7 +13,7 @@ function StudentRating() {
   const closeForm = () => setIsFormOpen(false)
   return (
     <div className='flex flex-col gap-4 px-8 py-4'>
-      <FaCirclePlus className='text-3xl self-end cursor-pointer' onClick={openForm}/>
+      {localStorage.getItem("studentID") === id && <FaCirclePlus className='text-3xl self-end cursor-pointer' onClick={openForm}/> }
       {ratings.map((rt) => (
         <div className='flex flex-col items-start gap-2 border rounded-md shadow p-4 relative hover:scale-105 transition-all duration-500' key={rt.id}>
           <span className='absolute top-2 right-2 text-md font-medium text-[#ED9AC2]'>{rt.rating}/5</span>

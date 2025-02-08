@@ -3,6 +3,7 @@ import Business from '../assets/Business.svg';
 import office from '../assets/office.svg';
 import pc from '../assets/pc.svg';
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function LogIn() {
     const [email, setEmail] = useState("");
@@ -10,8 +11,8 @@ function LogIn() {
     const [loading, setLoading] = useState(false); // For showing a loading spinner
     const [error, setError] = useState(null); // For error handling
     const [success, setSuccess] = useState(null); // For success message
+    const navigate = useNavigate();
 
-    
     const handleSubmit = async (e) => {
         e.preventDefault(); 
         setLoading(true);
@@ -40,6 +41,16 @@ function LogIn() {
             setSuccess("Login successful!");
             localStorage.setItem("token", result.access);
             localStorage.setItem("user", JSON.stringify(result));
+            if(result.enterprise_id) {
+                localStorage.setItem("entrepriseID", result.enterprise_id )
+                localStorage.setItem("studentID", null)
+                navigate("/company/"+result.enterprise_id+"/jobs");
+            } 
+            else {
+                localStorage.setItem("studentID", result.student_id);
+                localStorage.setItem("entrepriseID", null)
+                navigate("/student/"+result.student_id+"/projects");
+            } 
         } catch (err) {
             console.error("Login failed:", err);
             console.log(err);

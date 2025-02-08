@@ -57,7 +57,7 @@ function SigninStudent() {
       );
 
       const result = await response.json();
-      localStorage.setItem("token", result.access);
+      localStorage.setItem("token", result.access_token);
       localStorage.setItem("user", JSON.stringify(result));
       localStorage.setItem("studentID", result.student_id);
       console.log(result)
