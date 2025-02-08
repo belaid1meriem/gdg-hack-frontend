@@ -22,13 +22,19 @@ import CompanyJobs from "./components/CompanyJobs";
 import CompanyInternships from "./components/CompanyInternships";
 import CompanyCompetitions from "./components/CompanyCompetitions";
 import CompanyHacks from "./components/CompanyHacks";
+import SearchCompany from './components/SearchCompany.jsx';
+import SearchStudent from './components/SearchStudent.jsx';
+import SearchResults from './components/SearchResults.jsx';
+import SearchResultsStudent from './components/SearchResultsStudent.jsx';
 
 const router = createBrowserRouter([
-  { path: "/", element: <LandingPage />},
+  { path: "/", element: <LandingPage/>},
   { path: "Landingpage",element: <LandingPage />},
   { path: "SignupStudent", element: <SigninStudent />},
   { path: "SignupCompany", element: <SigninCompany />},
   { path: "Chooserole", element: <ChooseRole />},
+  { path: "Searchresults", element: <SearchResults />},
+  { path: "Searchresultsstudent", element: <SearchResultsStudent/>},
   { path: "Login", element: <LogIn/>},
   { path: "/student/:id",
    element: <StudentProfile />,

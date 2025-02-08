@@ -10,8 +10,9 @@ function LandingPage() {
     <div>
         <Navbar/>
         <Hero/>
-        <Whyus/>
         <HowItWorks/>
+        <Whyus/>
+      
         <Footer/>
     </div>
   )

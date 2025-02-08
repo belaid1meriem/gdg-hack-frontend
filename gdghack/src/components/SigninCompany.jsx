@@ -60,9 +60,9 @@ function SigninCompany() {
       
   return (
     <div className="max-w-3xl mx-auto bg-white p-8 shadow-md rounded-lg">
-    <h1 className="text-3xl font-bold text-center text-[#4C489E] mb-6">
-      Company Sign-Up
-    </h1>
+     <h1 className="text-4xl font-bold text-center text-[#4C489E] mb-10">
+  Get Started <span className="text-[#F3965C]">Now!</span>
+</h1>
     <form onSubmit={handleSubmit} className="space-y-4">
       {/* Company Name */}
       <div>
@@ -182,9 +182,9 @@ function SigninCompany() {
       <div>
         <button
           type="submit"
-          className="w-full bg-[#F3965C] text-white py-2 rounded-lg hover:bg-[#D97C42] transition"
+          className="w-full bg-[#F3965C] text-white py-2 font-bold rounded-lg hover:bg-[#D97C42] transition"
         >
-          Sign Up as a Company
+          Sign Up 
         </button>
       </div>
     </form>

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Business from '../assets/Business.svg';
 import office from '../assets/office.svg';
 import pc from '../assets/pc.svg';
+import { Link } from "react-router-dom";
 
 function LogIn() {
     const [email, setEmail] = useState("");
@@ -49,7 +50,7 @@ function LogIn() {
     };
 
     return (
-        <div className="flex flex-row justify-center items-center  gap-12 ">
+        <div className="flex flex-row justify-center items-center mt-10  gap-12 ">
             {/* Left Section - Login Form */}
             <div className="w-1/2 bg-white flex flex-col justify-center items-center p-8">
                 <h1 className="text-4xl font-bold mb-4 text-[#4C489E]">Welcome back </h1>
@@ -93,9 +94,12 @@ function LogIn() {
                 </form>
                 <p className="text-sm text-gray-600 mt-4">
                     Don’t have an account?{" "}
-                    <a href="#" className="text-[#4C489E] font-semibold">
-                        Sign Up
-                    </a>
+                    <Link
+            to="/Chooserole"
+            className="text-[#4C489E] font-semibold"
+          >
+              Sign Up
+          </Link>
                 </p>
             </div>
 
