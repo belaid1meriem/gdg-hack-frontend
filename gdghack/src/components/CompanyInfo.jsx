@@ -1,16 +1,16 @@
 import { RiPhoneFill } from "react-icons/ri";
 import { IoMdMail } from "react-icons/io";
 import { FaBuilding } from "react-icons/fa6";
+import { FaMapMarkerAlt } from "react-icons/fa";
+import { LiaIndustrySolid } from "react-icons/lia";
 import React from "react";
 
 function CompanyInfo({ companyInfo}) {
   return (
     <div className="flex flex-col gap-4">
-    <h1 className="text-xl font-semibold">
-      {companyInfo.name || "Bouchra Bachferrag"}
+    <h1 className="text-xl font-semibold ">
+      {companyInfo.name || "Microsoft Corporation"}
     </h1>
-    <p className="text-gray-600">{companyInfo.description || "No description available."}</p>
-  
     <div className="flex flex-col gap-2">
       {/* Phone */}
       {companyInfo.phone && (
@@ -31,7 +31,7 @@ function CompanyInfo({ companyInfo}) {
       {/* Industry */}
       {companyInfo.industry && (
         <div className="flex gap-2 items-center">
-          <FaBuilding />
+          <LiaIndustrySolid />
           <h3 className="font-semibold text-sm">{companyInfo.industry}</h3>
         </div>
       )}

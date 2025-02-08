@@ -7,15 +7,13 @@ import CompanyInfo from './CompanyInfo';
 
 function CompanyAbout() {
     const { id } = useParams();
-    const [companyInfo, setCompqnyInfo] = useCompanyInfo(id)
+    const [companyInfo, setCompanyInfo] = useCompanyInfo(id)
   return (
     <div className='flex flex-col gap-8 pl-20'>
     <CompanyInfo companyInfo={companyInfo}/>
-
-
     <div className="pb-16">
         <h1 className='text-lg font-semibold '>About</h1>
-        <p className='text-sm'>{companyInfo.bio}</p>
+        <p className="text-gray-600">{companyInfo.description}</p>
     </div>
 </div>
   )
@@ -30,7 +28,7 @@ const useCompanyInfo = (id) => {
       const fetchCompanyInfo = async () => {
         setLoading(true);
         try {
-          const response = await axios.get(`http://127.0.0.1:8000/student/studentprofile/${id}/`, {
+          const response = await axios.get(`http://127.0.0.1:8000/student/Entrpriseprofile/${id}/`, {
             headers: {
               'Authorization': `Bearer ${localStorage.getItem('token')}`
             }
