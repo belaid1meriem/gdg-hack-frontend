@@ -29,9 +29,6 @@ function SearchStudent() {
           try {
               let url = "";
               switch (filter) {
-                  case "type":
-                      url = `http://127.0.0.1:7000/student/jobs/search-by-type/?job_type=${value}`;
-                      break;
                   case "location":
                       url = `http://127.0.0.1:7000/student/jobs/search-by-location/?location=${value}`;
                       break;
@@ -83,37 +80,7 @@ function SearchStudent() {
     {/* Horizontal Filters */}
     {showFilters && (
         <div className="flex space-x-6 justify-center w-full max-w-4xl">
-            {/* Type */}
-            <div className="relative">
-                <button
-                    onClick={() => toggleFilter("type")}
-                    className="flex items-center text-gray-700 hover:text-yellow-500"
-                >
-                    Type
-                    {activeFilter === "type" ? (
-                        <ChevronUp className="ml-2 w-5 h-5" />
-                    ) : (
-                        <ChevronDown className="ml-2 w-5 h-5" />
-                    )}
-                </button>
-                {activeFilter === "type" && (
-                    <div className="absolute bg-white border rounded-lg shadow-md mt-2 w-64 z-10">
-                        <ul className="py-2 text-sm text-gray-700">
-                            {["Task", "internship"].map((type) => (
-                                <li
-                                    key={type}
-                                    className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                                    onClick={() => handleOptionSelect("type", type)}
-                                >
-                                    {type}
-                                </li>
-                            ))}
-                        </ul>
-                      
-                    </div>
-                )}
-            </div>
-
+           
             {/* Location */}
             <div className="relative">
                 <button

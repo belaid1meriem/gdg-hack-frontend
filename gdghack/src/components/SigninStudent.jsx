@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import { useNavigate } from "react-router-dom";
 function SigninStudent() {
   const [formData, setFormData] = useState({
     fullname: "",
@@ -15,7 +15,7 @@ function SigninStudent() {
   });
 
   const [skillInput, setSkillInput] = useState("");
-
+  const navigate = useNavigate();
   const addSkill = () => {
     if (skillInput.trim() !== "") {
       setFormData({
@@ -59,6 +59,8 @@ function SigninStudent() {
       const result = await response.json();
       localStorage.setItem("token", result.access);
       localStorage.setItem("user", JSON.stringify(result));
+      localStorage.setItem("studentID", result.student_id);
+      console.log(result)
       if (response.ok) {
         alert("Student created successfully!");
         setFormData({
@@ -73,6 +75,7 @@ function SigninStudent() {
           bio: "",
           status: true,
         });
+        navigate("/student/"+result.student_id+"/projects");
       } else {
         alert(`Error: ${result.message}`);
       }
@@ -203,41 +206,40 @@ function SigninStudent() {
             <option value="5th">5th Year</option>
           </select>
         </div>
-
         {/* Skills */}
-        <div>
-          <label className="block text-gray-600 font-semibold mb-2">Skills</label>
-          <div className="flex gap-2">
-            <input
-              type="text"
-              value={skillInput}
-              onChange={(e) => setSkillInput(e.target.value)}
-              placeholder="Enter a skill"
-              className="flex-1 p-3 border border-gray-300 rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#4C489E]"
-            />
-            <button
-              type="button"
-              onClick={addSkill}
-              className="px-4 py-2 bg-[#F3965C] text-white rounded-lg hover:bg-[#372F78] transition"
-            >
-              Add
-            </button>
-          </div>
-          <ul className="mt-2">
-            {formData.skills.map((skill, index) => (
-              <li key={index} className="flex items-center gap-2">
-                <span className="text-gray-700">{skill}</span>
-                <button
-                  type="button"
-                  onClick={() => removeSkill(index)}
-                  className="text-red-500 hover:text-red-700"
-                >
-                  Remove
-                </button>
-              </li>
-            ))}
-          </ul>
-        </div>
+<div>
+  <label className="block text-gray-600 font-semibold mb-2">Skills</label>
+  <div className="flex gap-2">
+    <input
+      type="text"
+      value={skillInput}
+      onChange={(e) => setSkillInput(e.target.value)}
+      placeholder="Enter a skill"
+      className="flex-1 p-3 border border-gray-300 rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#4C489E]"
+    />
+    <p
+     
+      onClick={addSkill}
+      className="px-4 py-2 bg-[#F3965C] text-white rounded-lg hover:bg-[#372F78] transition"
+    >
+      Add
+    </p>
+  </div>
+  <ul className="mt-2">
+    {formData.skills.map((skill, index) => (
+      <li key={index} className="flex items-center gap-2">
+        <span className="text-gray-700">{skill}</span>
+        <p
+          
+          onClick={() => removeSkill(index)}
+          className="text-red-500 hover:text-red-700"
+        >
+          Remove
+        </p>
+      </li>
+    ))}
+  </ul>
+</div>
 
         {/* About Me */}
         <div>
