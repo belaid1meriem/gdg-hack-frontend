@@ -3,15 +3,14 @@ import {useContext, useState} from 'react'
 import { useParams, useNavigate } from 'react-router-dom';
 import { indicatorsContext } from '../contexts/indicatorContext';
 
-function AddServiceExchange({closeForm}) {
-    const { id } = useParams();
-    const navigate = useNavigate();
+function JoinServiceExchange({closeForm,exchangeId}) {
+    const navigate = useNavigate()
     const { setErrorMsg } = useContext(indicatorsContext);
 
     const [formData, setFormData] = useState({
-        status:"pending",
-        task1:"",
-        student1: id
+        task2:"",
+        student2_id: localStorage.getItem('studentID'),
+        exchange_id: exchangeId
         });
 
     const [disabled, setDisabled] = useState(false);
@@ -26,7 +25,7 @@ function AddServiceExchange({closeForm}) {
         console.log("Submitted Data:", formData);
         try {
             setDisabled(true);
-            const response = await axios.post('http://127.0.0.1:8000/student/task_exchanges/create/', formData, {
+            const response = await axios.put('http://127.0.0.1:8000/student/task-exchange/join/', formData, {
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem('token')
                 }
@@ -47,33 +46,19 @@ function AddServiceExchange({closeForm}) {
             className="max-w-md mx-auto bg-white px-16 py-8 rounded-lg shadow-md space-y-4"
             onClick={(e) => e.stopPropagation()}
         >
-            <h2 className="text-xl font-bold">Add a New Service</h2>
+            <h2 className="text-xl font-bold">Exchange a Service</h2>
 
             {/* Task */}
             <div>
                 <label className="block text-sm font-medium text-gray-700">Task</label>
                 <input
                     type="text"
-                    name="task1"
-                    value={formData.task1}
+                    name="task2"
+                    value={formData.task2}
                     onChange={handleChange}
                     className="w-full p-2 mt-1 border border-gray-300 rounded-md focus:ring focus:ring-gray-400"
                     required
                 />
-            </div>
-
-            {/* Status */}
-            <div>
-                <label className="block text-sm font-medium text-gray-700">Status</label>
-                <select
-                    name="status"
-                    value={formData.status}
-                    onChange={handleChange}
-                    className="w-full p-2 mt-1 border border-gray-300 rounded-md focus:ring focus:ring-gray-400"
-                >
-                    <option value="pending">Pending</option>
-                    <option value="completed">Completed</option>
-                </select>
             </div>
 
             {/* Submit Button */}
@@ -89,4 +74,4 @@ function AddServiceExchange({closeForm}) {
   )
 }
 
-export default AddServiceExchange
+export default JoinServiceExchange

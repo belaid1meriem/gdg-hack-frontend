@@ -4,14 +4,25 @@ import { useParams } from 'react-router-dom';
 import { indicatorsContext } from '../contexts/indicatorContext';
 import { FaCirclePlus } from "react-icons/fa6";
 import AddServiceExchange from './AddServiceExchange';
+import JoinServiceExchange from './JoinServiceExchange';
 
 
 function StudentServiceExchanging() {
   const { id } = useParams();
   const [ services, setServices] = useServiceExchange(id)
   const [isFormOpen, setIsFormOpen] = useState(false)
+  const [isJoinFormOpen, setIsJoinFormOpen] = useState(false)
+  const [exchangeId, setExchangeId] = useState(null)
   const openForm = () => setIsFormOpen(true)
   const closeForm = () => setIsFormOpen(false)
+  const openJoinForm = (id) => {
+    setExchangeId(id)
+    setIsJoinFormOpen(true)
+  } 
+  const closeJoinForm = () => {
+    setExchangeId(null)
+    setIsJoinFormOpen(false)
+  } 
 
   return (
     <div className='flex flex-col gap-4 px-8 py-4'>
@@ -24,19 +35,36 @@ function StudentServiceExchanging() {
         <span className="absolute top-2 right-2 text-md font-medium text-gray-500">
           {service.status}
         </span>
-        <h4 className="font-semibold">
-          {service.student1_id+"  "+service.student1_name} ↔ {service.student2_id+"  "+service.student2_name}
-        </h4>
+        {service.student2 ?      
+          (<h4 className="font-semibold">
+            {service.student1+"  "+service.student1_name} ↔ {service.student2+"  "+service.student2_name}
+          </h4> ):
+          (<h4 className="font-semibold">
+            {service.student1+"  "+service.student1_name} 
+          </h4>)}
+          {/* <h4 className="font-semibold">
+            {service.student1+"  "+service.student1_name} ↔ {service.student2+"  "+service.student2_name}
+          </h4>  */}
         <p className="text-sm text-gray-700">🎯 {service.task1}</p>
-        <p className="text-sm text-gray-700">🎯 {service.task2}</p>
+        {service.task2 && <p className="text-sm text-gray-700">🎯 {service.task2}</p> }
         <span className="text-xs text-gray-500">
           {new Date(service.created_at).toLocaleDateString()}
         </span>
+        {!service.student2 &&
+        (<button onClick={()=>openJoinForm(service.id)} className=" place-self-end px-4 py-2 text-sm text-white bg-blue-500 rounded-md hover:bg-blue-600">
+          Exchange
+        </button>)
+        }
+        
       </div>
     ))}
 
       {isFormOpen && (
         <AddServiceExchange closeForm={closeForm}/>
+      )}
+
+      {isJoinFormOpen && (
+        <JoinServiceExchange exchangeId={exchangeId} closeForm={closeJoinForm}/>
       )}
     </div>
   )
